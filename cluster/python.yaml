@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webrs
+spec:
+  selector:
+    matchLabels:
+      app: web
+  strategy:
+    type: RollingUpdate
+  replicas: 4
+  template:
+    metadata:
+      name: webapp
+      labels:
+        app: web
+    spec:
+      containers:
+      - name: myapp
+        image: mylandmarktech/python-flask-app:2
+        # resources:
+        #   # limits:
+        #   #   memory: "128Mi"
+        #   #   cpu: "500m"
+        ports:
+        - containerPort: 5000
